@@ -2,7 +2,6 @@ import { configureStore } from '@reduxjs/toolkit';
 import { cartReducer, addItem, removeItem, updateQuantity, clearCart, CartItem } from './cartSlice';
 import { selectCartTotal, selectCartCount, selectCartItemById, selectIsCartEmpty } from './selectors';
 
-// store de test sans persist
 const makeStore = () => configureStore({
   reducer: { cart: cartReducer }
 });

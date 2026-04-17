@@ -1,4 +1,4 @@
-import { ActivityIndicator, FlatList, ListRenderItemInfo, RefreshControl } from "react-native"
+import { ListRenderItemInfo } from "react-native"
 import { Store } from "../../types/store"
 import { useCallback, useMemo } from "react";
 import { theme } from "../../theme";
@@ -6,7 +6,6 @@ import { STORE_ITEM_HEIGHT, StoreItem } from "../../components/StoreItem";
 import { Header } from "../../components/Header";
 import { SearchBar } from "../../components/SearchBar";
 import { Empty } from "../../components/Empty";
-import Animated, { useAnimatedScrollHandler, useSharedValue } from "react-native-reanimated";
 import { OptimizedList } from "../../components/Optimizedlist";
 
 

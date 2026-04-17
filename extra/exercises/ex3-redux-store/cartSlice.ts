@@ -22,7 +22,6 @@ const cartSlice = createSlice({
     addItem: (state, action: PayloadAction<CartItem>) => {
       const existing = state.items.find(item => item.id === action.payload.id);
       if (existing) {
-        // si l'article existe déjà, on incrémente la quantité
         existing.quantity += action.payload.quantity;
       } else {
         state.items.push(action.payload);
@@ -37,7 +36,6 @@ const cartSlice = createSlice({
       const existing = state.items.find(item => item.id === action.payload.id);
       if (existing) {
         if (action.payload.quantity <= 0) {
-          // si quantité = 0 on supprime l'article
           state.items = state.items.filter(item => item.id !== action.payload.id);
         } else {
           existing.quantity = action.payload.quantity;
