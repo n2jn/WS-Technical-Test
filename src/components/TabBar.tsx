@@ -3,7 +3,6 @@ import { StyleSheet, TouchableOpacity, View } from "react-native"
 import { MaterialTopTabBarProps } from "@react-navigation/material-top-tabs"
 import { Ionicons } from "@expo/vector-icons";
 import * as Haptics from 'expo-haptics';
-import { useCallback } from "react";
 
 type TabButtonProps = {
     route: { name: string; key: string }

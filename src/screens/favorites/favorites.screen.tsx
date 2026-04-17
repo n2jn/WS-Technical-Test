@@ -1,6 +1,5 @@
-import { SafeAreaView } from "react-native-safe-area-context"
 import { Store } from "../../types/store"
-import { FlatList, ListRenderItemInfo, Text, View } from "react-native";
+import {  ListRenderItemInfo } from "react-native";
 import { useCallback, useMemo } from "react";
 import { STORE_ITEM_HEIGHT, StoreItem } from "../../components/StoreItem";
 import { Header } from "../../components/Header";
