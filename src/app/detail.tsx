@@ -1,16 +1,14 @@
-import { StackScreenProps } from "@react-navigation/stack";
+import { useLocalSearchParams } from "expo-router";
 import { DetailContainer } from "../screens/detail"
-import { RootStackParamList } from "./_layout";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { theme } from "../theme";
 
-type DetailProps = StackScreenProps<RootStackParamList, 'Detail'>;
+export default function Detail() {
+    const { id } = useLocalSearchParams<{ id: string }>();
 
-export const Detail = ({ route }: DetailProps) => {
-    const params = route?.params
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: theme.colors.background }} edges={{ top: 'maximum', bottom: 'off' }}>
-            <DetailContainer id={params.id} />
+            <DetailContainer id={id} />
         </SafeAreaView>
     )
 }

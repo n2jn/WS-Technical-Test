@@ -1,7 +1,7 @@
 {
   "name": "storetracker",
   "version": "1.0.0",
-  "main": "index.ts",
+  "main": "expo-router/entry",
   "scripts": {
     "test:exercises": "jest extra/exercises",
     "test:ex1": "jest extra/exercises/ex1-useFetch",
@@ -25,6 +25,7 @@
     "expo-blur": "~15.0.8",
     "expo-haptics": "~15.0.8",
     "expo-linear-gradient": "~15.0.8",
+    "expo-router": "~6.0.23",
     "expo-status-bar": "~3.0.9",
     "fast-text-encoding": "^1.0.6",
     "lodash": "^4.18.1",
@@ -60,5 +61,8 @@
     "react-test-renderer": "^19.1.0",
     "typescript": "~5.9.2"
   },
-  "private": true
+  "private": true,
+  "msw": {
+    "workerDirectory": "public"
+  }
 }

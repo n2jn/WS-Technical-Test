@@ -1,7 +1,5 @@
-import { SafeAreaView } from "react-native-safe-area-context";
-import MapView, { Marker } from "react-native-maps";
 import { Store } from "../../types/store";
-import { Platform, StyleSheet } from "react-native";
+import {  Image, Platform, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 import Animated, {
@@ -14,6 +12,7 @@ import Animated, {
 import { MAP_HEIGHT, styles } from "./detail.style";
 import { DetailHeader } from "../../components/DetailHeader";
 import { OpeningHourCard } from "../../components/OpeningHourCard";
+import { Map } from "../../components/Map";
 
 type DetailScreenProps = {
   store: Store
@@ -53,23 +52,11 @@ export const DetailScreen = ({ store, onFavoritePress, isFavorite }: DetailScree
         accessibilityRole="header"
         accessibilityLabel={`Détail du magasin ${store.name}`}
       >
-        <MapView
-          style={styles.map}
-          initialRegion={{
-            latitude: store.latitude,
-            longitude: store.longitude,
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.0421,
-          }}
-          scrollEnabled={false}
-          zoomEnabled={false}
-          rotateEnabled={false}
-          pitchEnabled={false}
-          liteMode={Platform.OS === 'android'}
-          pointerEvents="none"
-        >
-          <Marker coordinate={{ latitude: store.latitude, longitude: store.longitude }} />
-        </MapView>
+        {Platform.OS === 'web' ?
+          <Image source={{uri: store.imageUrl}} resizeMode="cover" style={{height: MAP_HEIGHT, width: "100%"}}/>
+          :
+          <Map latitude={store.latitude} longitude={store.longitude}/>
+        }
         <LinearGradient
           colors={['rgba(247, 245, 240, 0)', 'rgba(247, 245, 240, 1)']}
           style={styles.gradient}

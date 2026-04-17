@@ -1,21 +1,28 @@
+import { withLayoutContext } from "expo-router";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { TabBar } from "./TabBar";
-import { Home } from "./home";
-import { Favorites } from "./favorites";
+import { TabBar } from "../../components/TabBar";
 
-const MaterialTopTab = createMaterialTopTabNavigator();
+const { Navigator } = createMaterialTopTabNavigator();
+
+export const MaterialTopTabs = withLayoutContext(Navigator);
 
 export type TabParamList = {
-    Home: undefined;
-    Favorites: undefined;
-  };
+    home: undefined;
+    favorites: undefined;
+};
 
-export const TabsNavigator = () => (
-  <MaterialTopTab.Navigator tabBar={TabBar} tabBarPosition="bottom" screenOptions={{
-    swipeEnabled: true,
-    lazy: true,
-  }}>
-    <MaterialTopTab.Screen name="Home" component={Home} />
-    <MaterialTopTab.Screen name="Favorites" component={Favorites} />
-  </MaterialTopTab.Navigator>
-);
+export default function TabLayout() {
+  return (
+    <MaterialTopTabs
+      tabBar={(props) => <TabBar {...props} />}
+      tabBarPosition="bottom"
+      screenOptions={{
+        swipeEnabled: true,
+        lazy: true,
+      }}
+    >
+      <MaterialTopTabs.Screen name="home" />
+      <MaterialTopTabs.Screen name="favorites" />
+    </MaterialTopTabs>
+  );
+}

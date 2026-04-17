@@ -76,17 +76,13 @@ export const HomeContainer = ({goToDetail}: HomeContainerProps) => {
         return <ActivityIndicator style={{flex: 1}}/>
     }
 
-    if (!data) {
-        return <></>
-    }
-
     return <HomeScreen
             onChangeText={handleOnChangeText}
             onItemPress={goToDetail}
             stores={paginatedData}
             onEndReached={handleOnEndReached}
             searchValue={filter}
-            totalStores={data.total}
+            totalStores={data?.total || 0}
             error={!!error}
         />
 }

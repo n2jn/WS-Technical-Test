@@ -12,11 +12,10 @@ type TabButtonProps = {
 }
 
 const TabButton = ({ route, isFocused, onPress }: TabButtonProps) => {
-    // Get icon name based on route name
     let iconName: keyof typeof Ionicons.glyphMap = 'help-outline'
-    if (route.name === 'Home') {
+    if (route.name === 'home') {
         iconName = 'business-outline'
-    } else if (route.name === 'Favorites') {
+    } else if (route.name === 'favorites') {
         iconName = 'star-outline'
     }
 
@@ -36,30 +35,29 @@ const TabButton = ({ route, isFocused, onPress }: TabButtonProps) => {
 
 export const TabBar = ({ state, navigation }: MaterialTopTabBarProps) => {
 
-    const handleOnTabPress = useCallback(async (name: string, key: string, isFocused: boolean ) => {
-        await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-        const event = navigation.emit({
-            type: 'tabPress',
-            target: key,
-            canPreventDefault: true,
-        })
-
-        if (!isFocused && !event.defaultPrevented) {
-            navigation.navigate(name)
-        }
-    }, [navigation]);
-
-    const renderTabs = useCallback(async (route: typeof state.routes[0], index: number) => {
-        const isFocused = state.index === index
-        return (
-            <TabButton key={route.key} route={route} isFocused={isFocused} onPress={handleOnTabPress} />
-        )
-    }, [state])
-
     return <View style={styles.tabBar}>
         <BlurView intensity={80} tint="systemThickMaterialLight" style={styles.blurContainer}>
             <View style={styles.tabsRow}>
-                {state.routes.map(renderTabs)}
+            {state.routes.map((route, index) => {
+            const isFocused = state.index === index
+
+            const onPress = async () => {
+            await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+              const event = navigation.emit({
+                type: 'tabPress',
+                target: route.key,
+                canPreventDefault: true,
+              })
+
+              if (!isFocused && !event.defaultPrevented) {
+                navigation.navigate(route.name)
+              }
+            }
+
+            return (
+              <TabButton key={route.key} route={route} isFocused={isFocused} onPress={onPress} />
+            )
+          })}
             </View>
         </BlurView>
     </View>

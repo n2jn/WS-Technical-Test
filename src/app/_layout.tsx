@@ -1,30 +1,40 @@
-import { NavigationContainer } from "@react-navigation/native";
-import { createSharedElementStackNavigator } from "react-navigation-shared-element";
-import { NavigatorScreenParams } from "@react-navigation/native";
-import { TabParamList, TabsNavigator } from "./(tabs)/_layout";
-import { Detail } from "./detail";
+import { Stack, useRouter } from 'expo-router'
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { FavoritesProvider } from '../provider/FavoriteProvider';
+import { Pressable, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
-const RootStack = createSharedElementStackNavigator();
-
-
-export type RootStackParamList = {
-  MainTabs: NavigatorScreenParams<TabParamList>;
-  Detail: { id: string | number };
-};
-
-export default () => (
-  <NavigationContainer>
-    <RootStack.Navigator screenOptions={{
-      headerShown: false,
-    }}>
-      <RootStack.Screen name="MainTabs" component={TabsNavigator} />
-      <RootStack.Screen
-        name="Detail"
-        component={Detail}
-        options={{
-          presentation: 'modal',
-        }}
-      />
-    </RootStack.Navigator>
-  </NavigationContainer>
-);
+export default function RootLayout() {
+  return (
+    <SafeAreaProvider>
+      <FavoritesProvider>
+        <Stack screenOptions={{
+          headerShown: false,
+        }}>
+          <Stack.Screen name="index"/>
+          <Stack.Screen name="(tabs)"/>
+          <Stack.Screen
+            name="detail"
+            options={{
+              presentation: 'modal',
+              headerShown: true,
+              headerTitle: '',
+              headerTransparent: true,
+              headerLeft: () => null,
+              headerRight: () => {
+                const router = useRouter();
+                return (
+                  <Pressable accessible onPress={() => router.back()}>
+                    <View style={{padding: 8}}>
+                      <Ionicons name="close" size={24} color="black" />
+                    </View>
+                  </Pressable>
+                );
+              }
+            }}
+          />
+        </Stack>
+      </FavoritesProvider>
+    </SafeAreaProvider>
+  );
+}

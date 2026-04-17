@@ -5,13 +5,14 @@ import { DetailScreen } from "./detail.screen"
 import { useFavorites } from "../../provider/FavoriteProvider";
 import { useCallback } from "react";
 import * as Haptics from 'expo-haptics';
+import { Empty } from "../../components/Empty";
 
 type DetailContainerProps = {
     id: string | number
 }
 
 export const DetailContainer = ({id}: DetailContainerProps) => {
-    const { data, loading } = useFetch<Store>(`https://api.example.com/stores/${id}`);
+    const { data, loading, error } = useFetch<Store>(`https://api.example.com/stores/${id}`);
     const {toggleFavorite, isFavorite} = useFavorites()
 
     const handleOnFavoritePress = useCallback(async () => {
@@ -22,7 +23,7 @@ export const DetailContainer = ({id}: DetailContainerProps) => {
 
 
     if (loading && !data) return <ActivityIndicator style={{flex: 1}}/>;
-    if (!data) return null;
-
-    return <DetailScreen store={data} isFavorite={isFavorite(data.id)} onFavoritePress={handleOnFavoritePress} />
+    if (error) return <Empty title={'Magasin introuvable'} sub={'Ce magasin n\'existe pas ou n\'est plus disponible'}/>
+    if (!data) return <Empty title={'Aucune donnée'} sub={'Impossible de charger les informations du magasin'}/>
+    return <DetailScreen store={data} isFavorite={isFavorite(data.id)} onFavoritePress={handleOnFavoritePress}/>
 }
