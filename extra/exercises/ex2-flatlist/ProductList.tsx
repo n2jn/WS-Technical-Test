@@ -29,17 +29,6 @@ export const ProductList = () => {
         }
     }, [data])
 
-    // // explain why in readme
-    // const filteredProduct = useMemo(() => {
-    //     if (!data) {
-    //         return [];
-    //     }
-    //     if (filter.length > 0) {
-    //         return data?.product?.filter((d) => d.name.includes(filter))
-    //     }
-    //     return data.product
-    // }, [data, filter])
-
     const getItemLayout = useCallback((_data: any, index: number) => ({
         length: PRODUCT_ITEM_HEIGHT,
         offset: PRODUCT_ITEM_HEIGHT * index,
@@ -65,7 +54,6 @@ export const ProductList = () => {
         debouncedRefetch({ name: sanitizedText, offset: 0 });
     }, [debouncedRefetch])
 
-    // explain why in readme
     const renderItem = useCallback(({ item }: ListRenderItemInfo<Product>) => {
         return <View style={{ flexDirection: 'row', height: PRODUCT_ITEM_HEIGHT }}>
             <Image source={{ uri: item.imageUrl }} style={{ width: 80, height: 80 }} />
@@ -105,15 +93,11 @@ export const ProductList = () => {
             data={paginatedData}
             renderItem={renderItem}
             style={styles.container}
-            // explain in readme
             keyExtractor={(item) => item.id.toString()}
-            // explain in readme
             onEndReached={handleOnEndReached}
             onEndReachedThreshold={0.7}
-            // explain on readme
             windowSize={5}
             maxToRenderPerBatch={PRODUCT_LIMIT}
-            // explain on readme
             getItemLayout={getItemLayout}
         />
     </>
