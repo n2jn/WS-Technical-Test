@@ -44,8 +44,8 @@ npm run test:coverage   # Rapport de couverture
 
 ## Documentation
 
-- [Architecture](./ARCHITECTURE.md) - Architecture et patterns utilisés
-- [Choix techniques](./TECHNICAL_CHOICES.md) - Justification des librairies
+- [Architecture](./extra/docs/README.md) - Architecture et patterns utilisés
+- [Choix techniques](./extra/docs/TECHNICAL_CHOICES.md) - Justification des librairies
 
 ## QCM
 
