@@ -78,7 +78,7 @@ Pour plus de détails sur l'architecture, voir [ARCHITECTURE.md](./ARCHITECTURE.
 - [Exercice 1 : useFetch](./extra/exercises/ex1-useFetch) - Hook custom pour les appels API
 - [Exercice 2 : Optimisation FlatList](./extra/exercises/ex2-flatlist) - Performance et virtualisation
 - [Exercice 3 : Redux store](./extra/exercises/ex3-redux-store) - store redux
-- [Exercice 4 : login form test](./extra/exercises/ex4-loginForm-test) - test login form
+- [Exercice 4 : login form test](./extra/exercises/ex4-loginForm-tests) - test login form
 
 ## 🧪 Tests
 
